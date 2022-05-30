@@ -1,5 +1,6 @@
 package com.jorge.backend.portfolio.auth.service;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,8 +17,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
  * JwtUtils
  */
 @Service
-public class JwtUtils {
+public class JwtUtils implements Serializable{
 
+    private static final long serialVersionUID = -2550185165626007488L;
     private final String SECRET_KEY = "secret";
 
     public String extractUsername(String token) {
