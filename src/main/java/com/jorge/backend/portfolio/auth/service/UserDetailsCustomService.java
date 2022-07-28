@@ -5,6 +5,7 @@ import java.util.Collections;
 import com.jorge.backend.portfolio.auth.dto.UserDTO;
 import com.jorge.backend.portfolio.auth.entity.UserEntity;
 import com.jorge.backend.portfolio.auth.repository.UserRepository;
+import com.jorge.backend.portfolio.entity.UserProfile;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,16 @@ public class UserDetailsCustomService implements UserDetailsService {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(userDTO.getUsername());
         userEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        UserProfile userProfile = new UserProfile();
+        userProfile.setName(userDTO.getName());
+        userProfile.setLastname(userDTO.getLastname());
+        userProfile.setBirthday(userDTO.getBirthday());
+        userProfile.setNationality(userDTO.getNationality());
+        userProfile.setAboutMe(userDTO.getAboutMe());
+        userProfile.setOccupation(userDTO.getOccupation());
+        userProfile.setUrlImage(userDTO.getImageUrl());
+        userEntity.setUserProfile(userProfile);
+
         userEntity = this.userRepository.save(userEntity);
 
         if (userEntity != null) {
